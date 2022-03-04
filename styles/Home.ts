@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const HomeContainer = styled.div`
-  padding: 0 2rem;
+  padding: 35px 0;
 `;
 
 export const HomeMain = styled.main`
@@ -9,4 +9,6 @@ export const HomeMain = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
 `;
