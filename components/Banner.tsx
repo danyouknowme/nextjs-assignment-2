@@ -6,10 +6,6 @@ import Image from 'next/image';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const BannerContainer = styled.div`
-  width: 100%;
-`;
-
 const BannerCard = styled.div`
   width: 100%;
   height: 530px;
@@ -32,15 +28,13 @@ const Banner: React.FC = () => {
   };
 
   return (
-    <BannerContainer>
-      <Slider {...sliderSettings}>
-        {banners.map((banner) => (
-          <BannerCard key={banner.name}>
-            <Image src={banner.image} alt={banner.name} layout={'fill'} objectFit={'cover'} />
-          </BannerCard>
-        ))}
-      </Slider>
-    </BannerContainer>
+    <Slider {...sliderSettings}>
+      {banners.map((banner) => (
+        <BannerCard key={banner.name}>
+          <Image src={banner.image} alt={banner.name} layout={'fill'} objectFit={'cover'} />
+        </BannerCard>
+      ))}
+    </Slider>
   );
 };
 
