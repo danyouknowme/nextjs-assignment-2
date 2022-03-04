@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const NavbarContainer = styled.nav`
-  width: 100vw;
+  width: 100%;
   height: 80px;
   background-color: #C4C4C4;
 `;
