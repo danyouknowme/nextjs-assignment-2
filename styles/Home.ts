@@ -12,3 +12,14 @@ export const HomeMain = styled.main`
   max-width: 1440px;
   margin: 0 auto;
 `;
+
+export const BannerContainer = styled.div`
+  width: 100%;
+`;
+
+export const ProductContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 48px;
+`;
