@@ -9,5 +9,6 @@ export const GlobalStyles = createGlobalStyle`
 
   body: {
     font-family: "Rubik", sans-serif;
+    overflow-x: hidden;
   }
 `;
