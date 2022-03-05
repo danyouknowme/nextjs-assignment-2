@@ -1,9 +1,11 @@
 import type { NextPage, GetStaticProps } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
+import axios from 'axios';
+
 import { Banner, ProductCard } from '../components';
 import { HomeContainer, HomeMain, BannerContainer, ProductContainer } from '../styles/Home';
 import { Product, GetProductItems } from '../types/product';
-import axios from 'axios';
 
 const Home: NextPage<{ products: Product[]; }> = ({ products }) => {
   return (
