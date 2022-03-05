@@ -29,3 +29,9 @@ export interface LikeButtonProps {
   liked: boolean;
   setLiked: (value: boolean) => void;
 }
+
+export interface ColorSelectorProps {
+  variants: Variant[];
+  selectedVariant: Variant;
+  setSelectedVariant: (variant: Variant) => void;
+}
