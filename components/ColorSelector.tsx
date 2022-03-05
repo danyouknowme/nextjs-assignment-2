@@ -6,30 +6,32 @@ const ColorSelectorContainer = styled.div`
   display: flex;
 `;
 
-const ColorSelectorWrapper = styled.div<{ selected: boolean; }>`
-  width: 28px;
-  height: 28px;
+const ColorSelectorWrapper = styled.div<{ selected: boolean; size: string; }>`
+  width: ${({ size }) => size === 'sm' ? '28px' : '39px'};
+  height: ${({ size }) => size === 'sm' ? '28px' : '39px'};
   border-radius: 50%;
   border: 2px solid ${({ selected }) => selected ? '#BEBEBE' : '#FFFFFF'};
-  margin: 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
 `;
 
-const SelectorColor = styled.div<{ color: string; }>`
-  margin: 2px;
-  width: 20px;
-  height: 20px;
+const SelectorColor = styled.div<{ color: string; size: string; }>`
+  width: ${({ size }) => size === 'sm' ? '20px' : '30px'};
+  height: ${({ size }) => size === 'sm' ? '20px' : '30px'};
   background-color: ${({ color }) => color};
   border-radius: 50%;
   cursor: pointer;
   border: 1px solid ${({ color }) => color === "#FFFFFF" ? "#DEDEDE" : '#FFFFFF'};
 `;
 
-const ColorSelector: React.FC<ColorSelectorProps> = ({ variants, selectedVariant, setSelectedVariant }) => {
+const ColorSelector: React.FC<ColorSelectorProps> = ({ size = 'sm', variants, selectedVariant, setSelectedVariant }) => {
   return (
     <ColorSelectorContainer>
       {variants.map((variant, index) => (
-        <ColorSelectorWrapper selected={variant.color === selectedVariant.color} key={index}>
-          <SelectorColor id={`color-${variant.color}`} color={variant.color} onClick={() => setSelectedVariant(variant)} />
+        <ColorSelectorWrapper size={size} selected={variant.color === selectedVariant.color} key={index}>
+          <SelectorColor size={size} id={`color-${variant.color}`} color={variant.color} onClick={() => setSelectedVariant(variant)} />
         </ColorSelectorWrapper>
       ))}
     </ColorSelectorContainer>
