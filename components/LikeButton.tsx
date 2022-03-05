@@ -22,8 +22,8 @@ const LikeButtonContainer = styled.div<{ liked: boolean; }>`
 
 const LikeButton: React.FC<LikeButtonProps> = ({ liked, setLiked }) => {
   return (
-    <LikeButtonContainer liked={liked} onClick={() => setLiked(!liked)}>
-      <HeartOutlined />
+    <LikeButtonContainer liked={liked} onClick={() => setLiked(!liked)} id={'like-btn'}>
+      <HeartOutlined id={'heart-icon'} />
     </LikeButtonContainer>
   );
 };
