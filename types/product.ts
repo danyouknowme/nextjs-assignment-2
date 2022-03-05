@@ -31,7 +31,15 @@ export interface LikeButtonProps {
 }
 
 export interface ColorSelectorProps {
+  size: string;
   variants: Variant[];
   selectedVariant: Variant;
   setSelectedVariant: (variant: Variant) => void;
 }
+
+export interface SizeSelectorProps {
+  variants: Variant[];
+  selectedVariant: Variant;
+  setSelectedVariant: (variant: Variant) => void;
+}
+
