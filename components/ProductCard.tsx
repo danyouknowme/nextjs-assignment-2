@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import Image from 'next/image';
+import styled from 'styled-components';
+import { useRouter } from 'next/router';
+
 import { ColorSelector, LikeButton } from '../components';
 import { Variant, ProductProps } from '../types/product';
 
@@ -74,11 +76,19 @@ const ProductPriceContainer = styled.div`
 const ProductCard: React.FC<ProductProps> = ({ product }) => {
   const [selectedVariant, setSelectedVariant] = useState<Variant>(product.variants[0]);
   const [liked, setLiked] = useState<boolean>(false);
+  const router = useRouter();
 
   const usageVariants = [...new Map(product.variants.map(item => [item['color'], item])).values()];
 
+  const linkToDetailPage = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLDivElement;
+    const { parentElement } = target;
+    if (target.id.includes('color') || target.id === 'like-btn' || parentElement?.id === 'heart-icon') return;
+    router.push(`/product/${product.id}`);
+  };
+
   return (
-    <ProductCardContainer>
+    <ProductCardContainer onClick={linkToDetailPage}>
       <ProductHeader>
         <ProductName>{product.name}</ProductName>
         <ProductType>{product.brand}</ProductType>
