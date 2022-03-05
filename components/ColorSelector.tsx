@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Variant } from '../types/product';
+import { ColorSelectorProps } from '../types/product';
 
 const ColorSelectorContainer = styled.div`
   display: flex;
@@ -24,18 +24,12 @@ const SelectorColor = styled.div<{ color: string; }>`
   border: 1px solid ${({ color }) => color === "#FFFFFF" ? "#DEDEDE" : '#FFFFFF'};
 `;
 
-interface Props {
-  variants: Variant[];
-  selectedVariant: Variant;
-  setSelectedVariant: (variant: Variant) => void;
-}
-
-const ColorSelector: React.FC<Props> = ({ variants, selectedVariant, setSelectedVariant }) => {
+const ColorSelector: React.FC<ColorSelectorProps> = ({ variants, selectedVariant, setSelectedVariant }) => {
   return (
     <ColorSelectorContainer>
       {variants.map((variant, index) => (
         <ColorSelectorWrapper selected={variant.color === selectedVariant.color} key={index}>
-          <SelectorColor color={variant.color} onClick={() => setSelectedVariant(variant)} />
+          <SelectorColor id={`color-${variant.color}`} color={variant.color} onClick={() => setSelectedVariant(variant)} />
         </ColorSelectorWrapper>
       ))}
     </ColorSelectorContainer>
