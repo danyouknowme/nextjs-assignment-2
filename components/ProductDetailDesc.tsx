@@ -13,10 +13,12 @@ const DetailDescContainer = styled.div`
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 20px;
+    user-select: none;
   }
 
   span {
     line-height: 30px;
+    user-select: none;
   }
 `;
 
