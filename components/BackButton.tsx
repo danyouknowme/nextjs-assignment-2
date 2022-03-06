@@ -13,7 +13,7 @@ const BackButtonContainer = styled.div`
 `;
 
 
-const BackButton = () => {
+const BackButton: React.FC = () => {
   const router = useRouter();
 
   const NavigateToHome = (e: React.MouseEvent) => {
