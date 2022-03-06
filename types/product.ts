@@ -26,6 +26,7 @@ export interface ProductProps {
 }
 
 export interface LikeButtonProps {
+  size: string;
   liked: boolean;
   setLiked: (value: boolean) => void;
 }
@@ -43,3 +44,8 @@ export interface SizeSelectorProps {
   setSelectedVariant: (variants: Variant) => void;
 }
 
+export interface SpinnerProps {
+  variant: Variant | null;
+  selectedAmount: number;
+  setSelectedAmount: (value: number) => void;
+}
