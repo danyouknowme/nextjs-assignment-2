@@ -38,8 +38,8 @@ export interface ColorSelectorProps {
 }
 
 export interface SizeSelectorProps {
-  variants: Variant[];
-  selectedVariant: Variant;
-  setSelectedVariant: (variant: Variant) => void;
+  variants: Variant[] | null;
+  selectedVariant: Variant | null;
+  setSelectedVariant: (variants: Variant) => void;
 }
 
