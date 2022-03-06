@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { HeartOutlined } from '@ant-design/icons';
 import { LikeButtonProps } from '../types/product';
 
-const LikeButtonContainer = styled.div<{ liked: boolean; }>`
-  width: 42px;
-  height: 42px;
+const LikeButtonContainer = styled.div<{ liked: boolean; size: string; }>`
+  width: ${({ size }) => size === 'sm' ? '42px' : '64px'};
+  height: ${({ size }) => size === 'sm' ? '42px' : '64px'};
   border: 1px solid ${({ liked }) => liked ? '#6BBBFF' : '#C4C4C4'};
   background-color: ${({ liked }) => liked ? '#6BBBFF' : '#FFFFFF'};
   border-radius: 50%;
@@ -15,14 +15,14 @@ const LikeButtonContainer = styled.div<{ liked: boolean; }>`
   cursor: pointer;
 
   span {
-    font-size: 1.2rem;
+    font-size: ${({ size }) => size === 'sm' ? '1.2rem' : '1.7rem'};;
     color: ${({ liked }) => liked ? '#FFFFFF' : '#6BBBFF'};
   }
 `;
 
-const LikeButton: React.FC<LikeButtonProps> = ({ liked, setLiked }) => {
+const LikeButton: React.FC<LikeButtonProps> = ({ size = 'sm', liked, setLiked }) => {
   return (
-    <LikeButtonContainer liked={liked} onClick={() => setLiked(!liked)} id={'like-btn'}>
+    <LikeButtonContainer size={size} liked={liked} onClick={() => setLiked(!liked)} id={'like-btn'}>
       <HeartOutlined id={'heart-icon'} />
     </LikeButtonContainer>
   );
