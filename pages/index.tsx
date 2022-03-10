@@ -1,13 +1,16 @@
 import type { NextPage, GetStaticProps } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import axios from 'axios';
-
 import { Banner, ProductCard } from '../components';
-import { HomeContainer, HomeMain, BannerContainer, ProductContainer } from '../styles/Home';
+import {
+  HomeContainer,
+  HomeMain,
+  BannerContainer,
+  ProductContainer,
+} from '../styles/Home';
 import { Product, GetProductItems } from '../types/product';
 
-const Home: NextPage<{ products: Product[]; }> = ({ products }) => {
+const Home: NextPage<{ products: Product[] }> = ({ products }) => {
   return (
     <HomeContainer>
       <Head>
@@ -16,12 +19,12 @@ const Home: NextPage<{ products: Product[]; }> = ({ products }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <HomeMain>
-        <BannerContainer>
+        <BannerContainer id={'banner'}>
           <Banner />
         </BannerContainer>
         <ProductContainer>
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {products.map((product, index) => (
+            <ProductCard key={index} product={product} />
           ))}
         </ProductContainer>
       </HomeMain>
@@ -30,11 +33,13 @@ const Home: NextPage<{ products: Product[]; }> = ({ products }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await axios.get('https://asia-southeast1-muze-academy.cloudfunctions.net/products');
+  const res = await axios.get(
+    'https://asia-southeast1-muze-academy.cloudfunctions.net/products'
+  );
   const { items }: GetProductItems = await res.data;
 
   return {
-    props: { products: items }
+    props: { products: items },
   };
 };
 

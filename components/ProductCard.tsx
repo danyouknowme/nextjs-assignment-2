@@ -14,7 +14,7 @@ const ProductCardContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   cursor: pointer;
@@ -37,7 +37,7 @@ const ProductName = styled.h3`
 const ProductType = styled.span`
   font-size: 12px;
   font-weight: 300;
-  color: #BEBEBE;
+  color: #bebebe;
 `;
 
 const ProductImageContainer = styled.div`
@@ -56,13 +56,13 @@ const ProductFooter = styled.div`
 const ProductPrice = styled.h3`
   font-size: 24px;
   font-weight: 400;
-  color: #6BBBFF;
+  color: #6bbbff;
 `;
 
 const ProductFirstPrice = styled.span`
   font-size: 12px;
   font-weight: 300;
-  color: #FE6969;
+  color: #fe6969;
   text-decoration: line-through;
 `;
 
@@ -74,32 +74,56 @@ const ProductPriceContainer = styled.div`
 `;
 
 const ProductCard: React.FC<ProductProps> = ({ product }) => {
-  const [selectedVariant, setSelectedVariant] = useState<Variant>(product.variants[0]);
+  const [selectedVariant, setSelectedVariant] = useState<Variant>(
+    product.variants[0]
+  );
   const [liked, setLiked] = useState<boolean>(false);
   const router = useRouter();
 
-  const usageVariants = [...new Map(product.variants.map(item => [item['color'], item])).values()];
+  const usageVariants = [
+    ...new Map(product.variants.map((item) => [item['color'], item])).values(),
+  ];
 
   const linkToDetailPage = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
     const { parentElement } = target;
-    if (target.id.includes('color') || target.id === 'like-btn' || parentElement?.id === 'heart-icon') return;
+    if (
+      target.id.includes('color') ||
+      target.id === 'like-btn' ||
+      parentElement?.id === 'heart-icon'
+    )
+      return;
     router.push(`/product/${product.id}`);
   };
 
   return (
-    <ProductCardContainer onClick={linkToDetailPage}>
+    <ProductCardContainer
+      onClick={linkToDetailPage}
+      id={`product-card-${product.id}`}
+    >
       <ProductHeader>
         <ProductName>{product.name}</ProductName>
         <ProductType>{product.brand}</ProductType>
       </ProductHeader>
       <ProductImageContainer>
-        <Image alt='product image' src={selectedVariant.imageUrl} layout={'fill'} objectFit={'cover'} />
+        <Image
+          alt='product image'
+          src={selectedVariant.imageUrl}
+          layout={'fill'}
+          objectFit={'cover'}
+        />
       </ProductImageContainer>
-      <ColorSelector size={'sm'} variants={usageVariants} selectedVariant={selectedVariant} setSelectedVariant={setSelectedVariant} />
+      <ColorSelector
+        size={'sm'}
+        variants={usageVariants}
+        selectedVariant={selectedVariant}
+        setSelectedVariant={setSelectedVariant}
+      />
       <ProductFooter>
         <ProductPriceContainer>
-          <ProductPrice>${(selectedVariant.price - selectedVariant.discount).toFixed(2)}</ProductPrice>
+          <ProductPrice>
+            ${(selectedVariant.price - selectedVariant.discount).toFixed(2)}
+          </ProductPrice>
           {selectedVariant.discount === 0 && (
             <ProductFirstPrice>${selectedVariant.price}</ProductFirstPrice>
           )}
