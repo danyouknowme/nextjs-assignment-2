@@ -7,6 +7,7 @@ import SizeSelector from './SizeSelector';
 import BackButton from './BackButton';
 import Spinner from './Spinner';
 import LikeButton from './LikeButton';
+import axios from 'axios';
 
 const ProductDetailContainer = styled.div`
   position: relative;
@@ -108,14 +109,15 @@ const ProductDetailFooter = styled.div`
   align-items: center;
 `;
 
-const AddToCartButton = styled.div`
+const AddToCartButton = styled.div<{ disabled: boolean; }>`
   width: 400px;
   height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 80px;
-  background-color: #BEBEBE;
+  background-color: ${({ disabled }) => disabled ? '#BEBEBE' : '#6BBBFF'};
+  cursor: ${({ disabled }) => disabled ? 'default' : 'pointer'};
 
   h3 {
     text-transform: uppercase;
@@ -147,6 +149,18 @@ const ProductDetailCard: React.FC<{ product: Product; }> = ({ product }) => {
   useEffect(() => {
     setSelectedAmountVariant(1);
   }, [selectedColorVariant, selectedSizeVariant]);
+
+  const onAddToCart = async () => {
+    if (!selectedSizeVariant) return;
+    await axios.post('https://asia-southeast1-muze-academy.cloudfunctions.net/cart', {
+      "sku": selectedSizeVariant.sku,
+      "qty": selectedAmountVariant
+    }).then((res) => {
+      if (confirm('Add product to cart successfully!')) {
+        window.open(`https://asia-southeast1-muze-academy.cloudfunctions.net/cart/${res.data.id}`, '_blank')?.focus();
+      }
+    });
+  };
 
   return (
     <ProductDetailContainer>
@@ -181,7 +195,7 @@ const ProductDetailCard: React.FC<{ product: Product; }> = ({ product }) => {
         <HorizontalLine />
         <ProductDetailFooter>
           <Spinner variant={usageAmountVariant[0]} selectedAmount={selectedAmountVariant} setSelectedAmount={setSelectedAmountVariant} />
-          <AddToCartButton>
+          <AddToCartButton onClick={onAddToCart} disabled={!selectedSizeVariant}>
             <h3>Add to cart</h3>
           </AddToCartButton>
           <LikeButton size='md' liked={liked} setLiked={setLiked} />
