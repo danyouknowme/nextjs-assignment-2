@@ -94,9 +94,9 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
         <ProductType>{product.brand}</ProductType>
       </ProductHeader>
       <ProductImageContainer>
-        <Image alt='' src={selectedVariant.imageUrl} layout={'fill'} objectFit={'cover'} />
+        <Image alt='product image' src={selectedVariant.imageUrl} layout={'fill'} objectFit={'cover'} />
       </ProductImageContainer>
-      <ColorSelector variants={usageVariants} selectedVariant={selectedVariant} setSelectedVariant={setSelectedVariant} />
+      <ColorSelector size={'sm'} variants={usageVariants} selectedVariant={selectedVariant} setSelectedVariant={setSelectedVariant} />
       <ProductFooter>
         <ProductPriceContainer>
           <ProductPrice>${(selectedVariant.price - selectedVariant.discount).toFixed(2)}</ProductPrice>
@@ -104,7 +104,7 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
             <ProductFirstPrice>${selectedVariant.price}</ProductFirstPrice>
           )}
         </ProductPriceContainer>
-        <LikeButton liked={liked} setLiked={setLiked} />
+        <LikeButton size={'sm'} liked={liked} setLiked={setLiked} />
       </ProductFooter>
     </ProductCardContainer>
   );
