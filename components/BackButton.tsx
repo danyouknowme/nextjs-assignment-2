@@ -12,7 +12,6 @@ const BackButtonContainer = styled.div`
   z-index: 2;
 `;
 
-
 const BackButton: React.FC = () => {
   const router = useRouter();
 
@@ -22,7 +21,7 @@ const BackButton: React.FC = () => {
   };
 
   return (
-    <BackButtonContainer onClick={e => NavigateToHome(e)}>
+    <BackButtonContainer onClick={(e) => NavigateToHome(e)} id='back-btn'>
       <IoIosArrowBack />
     </BackButtonContainer>
   );
